@@ -1,37 +1,29 @@
-                
                 <!DOCTYPE html>
                 <html lang="en">
                 <?php
-include("../connection/connect.php");
-error_reporting(0);
-session_start();
-if(isset($_POST['submit']))
-{
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	
-	if(!empty($_POST["submit"])) 
-     {
-	$loginquery ="SELECT * FROM admin WHERE username='$username' && password='".md5($password)."'";
-	$result=mysqli_query($db, $loginquery);
-	$row=mysqli_fetch_array($result);
-	
-	                        if(is_array($row))
-								{
-                                    	$_SESSION["adm_id"] = $row['adm_id'];
-										header("refresh:1;url=dashboard.php");
-	                            } 
-							else
-							    {
-										echo "<script>alert('Invalid Username or Password!');</script>"; 
-                                }
-	 }
-	
-	
-}
+                include("../connection/connect.php");
+                error_reporting(0);
+                session_start();
+                if (isset($_POST['submit'])) {
+                    $username = $_POST['username'];
+                    $password = $_POST['password'];
 
-?>
-                
+                    if (!empty($_POST["submit"])) {
+                        $loginquery = "SELECT * FROM admin WHERE username='$username' && password='" . md5($password) . "'";
+                        $result = mysqli_query($db, $loginquery);
+                        $row = mysqli_fetch_array($result);
+
+                        if (is_array($row)) {
+                            $_SESSION["adm_id"] = $row['adm_id'];
+                            header("refresh:1;url=dashboard.php");
+                        } else {
+                            echo "<script>alert('Invalid Username or Password!');</script>";
+                        }
+                    }
+                }
+
+                ?>
+
 
                 <head>
                     <meta charset="UTF-8">
@@ -50,7 +42,7 @@ if(isset($_POST['submit']))
 
                 <body>
 
-                    
+
 
                     <div class="container">
                         <div class="info">
@@ -67,7 +59,7 @@ if(isset($_POST['submit']))
                             <input type="submit" name="submit" value="Login" />
 
                         </form>
-                        
+
 
                     </div>
                     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -75,4 +67,3 @@ if(isset($_POST['submit']))
                 </body>
 
                 </html>
-                
